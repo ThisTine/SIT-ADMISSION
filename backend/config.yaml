@@ -1,0 +1,7 @@
+environment: 1
+log_level: 6
+address: :3000
+cors:
+  - http://localhost:8080
+mysql_dsn: dev1:FekbZRt3CgLmTrB@tcp(admission-int.sit.kmutt.ac.th:4306)/sitams_dev1?charset=utf8mb4&parseTime=True&loc=Local
+mysql_migrate: true

@@ -12,7 +12,7 @@ import (
 
 var C = new(Model)
 
-func init() {
+func Init() {
 	// Load configurations to struct
 	yml, err := ioutil.ReadFile("config.yaml")
 	if err != nil {

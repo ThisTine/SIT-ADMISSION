@@ -18,7 +18,6 @@ func Init() {
 		ErrorHandler:  ErrorHandler,
 		Prefork:       false,
 		StrictRouting: true,
-		ServerHeader:  config.C.ServerHeader,
 		ReadTimeout:   5 * time.Second,
 		WriteTimeout:  5 * time.Second,
 	})
