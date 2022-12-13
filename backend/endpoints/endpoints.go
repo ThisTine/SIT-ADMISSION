@@ -1,5 +1,19 @@
 package endpoints
 
-import "github.com/gofiber/fiber/v2"
+import (
+	"github.com/gofiber/fiber/v2"
 
-func Init(router fiber.Router) {}
+	adminEndpoint "backend/endpoints/admin"
+	publicEndpoint "backend/endpoints/public"
+	"backend/modules/fiber/middlewares"
+)
+
+func Init(router fiber.Router) {
+	// * Public
+	public := router.Group("/public")
+	public.Put("/admin/login", publicEndpoint.PutAdminLoginHandler)
+
+	// * Admin
+	admin := router.Group("/admin", middlewares.AdminJwt())
+	admin.Get("rounds", adminEndpoint.GetRoundsHandler)
+}

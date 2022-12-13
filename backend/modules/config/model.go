@@ -9,4 +9,6 @@ type Model struct {
 
 	MySqlDsn     string `yaml:"mysql_dsn" validate:"required"`
 	MySqlMigrate bool   `yaml:"mysql_migrate"`
+
+	JwtSecret string `yaml:"jwt_secret" validate:"required"`
 }

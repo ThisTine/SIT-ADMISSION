@@ -10,7 +10,7 @@ func (v *ErrorInstance) Error() string {
 	return v.Message
 }
 
-func Error(analyze bool, message string, args2 ...any) *ErrorInstance {
+func Error(critical bool, message string, args2 ...any) *ErrorInstance {
 	if len(args2) == 1 {
 		if code, ok := args2[0].(string); ok {
 			return &ErrorInstance{

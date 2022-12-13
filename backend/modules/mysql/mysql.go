@@ -67,6 +67,7 @@ func Init() {
 func migrate() error {
 	// * Migrate model
 	if err := DB.AutoMigrate(
+		new(model.Admin),
 		new(model.Round),
 		new(model.Student),
 		new(model.StudentToken),
