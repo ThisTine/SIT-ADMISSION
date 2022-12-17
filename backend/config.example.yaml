@@ -5,4 +5,9 @@ cors:
   - http://localhost:8080
 mysql_dsn: dev1:20221126@tcp(admission-int.sit.kmutt.ac.th:3306)/sitams_dev1?charset=utf8mb4&parseTime=True&loc=Local
 mysql_migrate: true
+ldap_address: admission-int.sit.kmutt.ac.th:636
+ldap_base_dn: dc=sit,dc=kmutt,dc=ac,dc=th
+ldap_cert: |
+  -----BEGIN CERTIFICATE-----
+  -----END CERTIFICATE-----
 jwt_secret: 1234567890

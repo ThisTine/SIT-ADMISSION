@@ -1,7 +1,8 @@
 package payload
 
 type AdminLogin struct {
-	Email *string `json:"email" validate:"email"`
+	Uid      *string `json:"uid" validate:"required"`
+	Password *string `json:"password" validate:"required"`
 }
 
 type AdminRoundQuery struct {

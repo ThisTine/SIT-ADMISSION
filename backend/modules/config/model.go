@@ -10,5 +10,9 @@ type Model struct {
 	MySqlDsn     string `yaml:"mysql_dsn" validate:"required"`
 	MySqlMigrate bool   `yaml:"mysql_migrate"`
 
+	LdapAddress string `yaml:"ldap_address" validate:"required"`
+	LdapBaseDn  string `yaml:"ldap_base_dn" validate:"required"`
+	LdapCert    string `yaml:"ldap_cert" validate:"required"`
+
 	JwtSecret string `yaml:"jwt_secret" validate:"required"`
 }
