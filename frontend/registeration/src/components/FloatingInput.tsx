@@ -6,7 +6,7 @@ import {
   FormErrorMessage,
   InputProps,
 } from "@chakra-ui/react";
-import { FC } from "react";
+import { FC, forwardRef } from "react";
 
 const sitInput: InputProps = {
   bg: "rgba(255,255,255,0.3)",
@@ -31,7 +31,7 @@ interface FloatingInputProps {
   isInvalid?: boolean;
 }
 
-const FloatingInput: FC<FloatingInputProps> = (props) => {
+const FloatingInput: FC<FloatingInputProps> = forwardRef((props, ref) => {
   return (
     <FormControl
       variant="floating"
@@ -40,15 +40,17 @@ const FloatingInput: FC<FloatingInputProps> = (props) => {
     >
       <Input
         variant={"unstyled"}
-        placeholder=" "
+        ref={ref as any}
+        {...props}
         {...sitInput}
         {...props.input}
+        placeholder=" "
       />
       <FormLabel>{props.placeholder}</FormLabel>
       <FormHelperText>{props.description}</FormHelperText>
       <FormErrorMessage>{props.errorMessage}</FormErrorMessage>
     </FormControl>
   );
-};
+});
 
 export default FloatingInput;

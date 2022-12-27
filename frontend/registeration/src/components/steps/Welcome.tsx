@@ -7,12 +7,25 @@ import {
   Link,
   Text,
 } from "@chakra-ui/react";
-import React from "react";
+import React, {
+  Dispatch,
+  FC,
+  FormEvent,
+  SetStateAction,
+  useState,
+} from "react";
 import BlurCard from "../BlurCard";
 import Devider from "../Devider";
 import FloatingInput from "../FloatingInput";
 
-const Welcome = () => {
+const Welcome: FC<{ setUserEmail: Dispatch<SetStateAction<string>> }> = ({
+  setUserEmail,
+}) => {
+  const [email, setEmail] = useState<string>("");
+  const onSubmit = (e: FormEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setUserEmail(email);
+  };
   return (
     <BlurCard>
       <Heading>
@@ -34,10 +47,14 @@ const Welcome = () => {
         </Text>
       </Box>
       <VStack>
-        <Container maxW={"md"}>
-          <FloatingInput placeholder="Email" isRequired />
+        <Container maxW={"md"} as="form" onSubmit={onSubmit}>
+          <FloatingInput
+            placeholder="Email"
+            isRequired
+            input={{ type: "email", onChange: (e) => setEmail(e.target.value) }}
+          />
           <VStack gap={5} mt={5}>
-            <Button px={16} variant={"sit-blue"} size={"lg"}>
+            <Button px={16} variant={"sit-blue"} size={"lg"} type="submit">
               ฉันเข้าใจแล้ว
             </Button>
             <Link color={"white"}>แก้ไขข้อมูลใบสมัครเก่า</Link>
