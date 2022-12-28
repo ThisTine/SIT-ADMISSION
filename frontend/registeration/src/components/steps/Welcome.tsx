@@ -17,7 +17,7 @@ import React, {
 import BlurCard from "../BlurCard";
 import Devider from "../Devider";
 import FloatingInput from "../FloatingInput";
-
+import { Link as RouterDomLink } from "react-router-dom";
 const Welcome: FC<{ setUserEmail: Dispatch<SetStateAction<string>> }> = ({
   setUserEmail,
 }) => {
@@ -57,7 +57,11 @@ const Welcome: FC<{ setUserEmail: Dispatch<SetStateAction<string>> }> = ({
             <Button px={16} variant={"sit-blue"} size={"lg"} type="submit">
               ฉันเข้าใจแล้ว
             </Button>
-            <Link color={"white"}>แก้ไขข้อมูลใบสมัครเก่า</Link>
+            <RouterDomLink to="/edit">
+              <Link color={"white"} as="p">
+                แก้ไขข้อมูลใบสมัครเก่า
+              </Link>
+            </RouterDomLink>
           </VStack>
         </Container>
       </VStack>
