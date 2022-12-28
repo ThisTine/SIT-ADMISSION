@@ -7,11 +7,15 @@ type ZipCodeQuery struct {
 }
 
 type ZipCodeInfo struct {
-	ProvinceId     uint32           `json:"province_id"`
-	ProvinceNameTh string           `json:"province_name_th"`
-	ProvinceNameEn string           `json:"province_name_en"`
-	AmphureId      uint32           `json:"amphure_id"`
-	AmphureNameTh  string           `json:"amphure_name_th"`
-	AmphureNameEn  string           `json:"amphure_name_en"`
-	Tambons        []*common.Tambon `json:"tambons"`
+	ProvinceId     uint32         `json:"province_id"`
+	ProvinceNameTh string         `json:"province_name_th"`
+	ProvinceNameEn string         `json:"province_name_en"`
+	Amphures       []*AmphureInfo `json:"amphures"`
+}
+
+type AmphureInfo struct {
+	AmphureId     uint32           `json:"amphure_id"`
+	AmphureNameTh string           `json:"amphure_name_th"`
+	AmphureNameEn string           `json:"amphure_name_en"`
+	Tambons       []*common.Tambon `json:"tambons"`
 }
