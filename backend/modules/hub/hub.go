@@ -11,11 +11,13 @@ import (
 
 var Hub = &hub{
 	Provinces:  nil,
+	TambonMap:  map[uint32]*common.Tambon{},
 	ZipCodeMap: map[uint32][]*common.Tambon{},
 }
 
 type hub struct {
 	Provinces  []*common.Province
+	TambonMap  map[uint32]*common.Tambon
 	ZipCodeMap map[uint32][]*common.Tambon
 }
 
@@ -34,6 +36,7 @@ func Init() {
 		for _, amphure := range province.Amphures {
 			for _, tambon := range amphure.Tambons {
 				tambon.Amphure = amphure
+				Hub.TambonMap[tambon.Id] = tambon
 				Hub.ZipCodeMap[tambon.ZipCode] = append(Hub.ZipCodeMap[tambon.ZipCode], tambon)
 			}
 			amphure.Province = province
