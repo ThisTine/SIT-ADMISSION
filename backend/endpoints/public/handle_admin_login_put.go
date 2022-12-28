@@ -7,6 +7,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"gopkg.in/ldap.v2"
 
+	"backend/modules/config"
 	ldapLoader "backend/modules/ldap"
 
 	"backend/modules/mysql"
@@ -39,7 +40,7 @@ func PutAdminLoginHandler(c *fiber.Ctx) error {
 
 	// * LDAP authentication
 	searchRequest := ldap.NewSearchRequest(
-		"dc=sit,dc=kmutt,dc=ac,dc=th",
+		config.C.LdapBaseDn,
 		ldap.ScopeWholeSubtree, ldap.NeverDerefAliases, 0, 0, false,
 		fmt.Sprintf("(uid=%s)", *body.Uid),
 		[]string{"dn", "uid", "name"},
