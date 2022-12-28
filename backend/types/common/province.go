@@ -13,7 +13,7 @@ type Amphure struct {
 	NameTh     string    `json:"name_th"`
 	NameEn     string    `json:"name_en"`
 	ProvinceId uint32    `json:"province_id"`
-	Province   *Province `json:"province"`
+	Province   *Province `json:"-"`
 	Tambons    []*Tambon `json:"tambons"`
 }
 
@@ -23,5 +23,5 @@ type Tambon struct {
 	NameTh    string   `json:"name_th"`
 	NameEn    string   `json:"name_en"`
 	AmphureId uint32   `json:"amphure_id"`
-	Amphure   *Amphure `json:"amphure"`
+	Amphure   *Amphure `json:"-"`
 }
