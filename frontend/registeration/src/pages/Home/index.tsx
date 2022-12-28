@@ -19,13 +19,7 @@ import RegisterContextProvider, {
   registerDataContext,
 } from "../../context/RegisterDataContext";
 import AppLayout from "../../Layout/AppLayout";
-import {
-  optionsTypes,
-  stepone,
-  stepsParent,
-  stepthree,
-  steptwo,
-} from "./stepsdata";
+import { optionsTypes, stepone, stepthree, steptwo } from "./stepsdata";
 
 const Home = () => {
   const {
@@ -99,6 +93,7 @@ const Home = () => {
       children: "Clear",
       onClick: () => {
         setData((v) => ({}));
+        addressContext.clearAddress();
         setEmail("");
       },
     };

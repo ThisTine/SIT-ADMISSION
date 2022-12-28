@@ -23,7 +23,6 @@ import FloatingInput from "../FloatingInput";
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 import SpecialSelect from "../SpecialSelect";
 import { useForm } from "react-hook-form";
-import ReactSelect from "react-select";
 import { registerDataContext } from "../../context/RegisterDataContext";
 
 export interface StepComponentsProps {

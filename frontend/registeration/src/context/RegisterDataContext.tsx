@@ -40,13 +40,14 @@ interface registerDataContext {
     address?: AddressOptions;
     setZipCode?: Dispatch<SetStateAction<string>>;
     setDistrict?: Dispatch<SetStateAction<string>>;
+    clearAddress: () => void;
   };
   data: Record<string, string>;
   setData: Dispatch<SetStateAction<Record<string, string>>>;
 }
 
 export const registerDataContext = createContext<registerDataContext>({
-  addressContext: { zipcode: "", district: "" },
+  addressContext: { zipcode: "", district: "", clearAddress: () => {} },
   data: {},
   setData: null as any,
 });
@@ -56,6 +57,10 @@ const RegisterContextProvider: FC<{ children: ReactNode }> = (props) => {
   const [district, setDistrict] = useState<string>("");
   const [address, setAddress] = useState<AddressOptions | null>(null);
   const [data, setData] = useState<Record<string, string>>({});
+
+  const clearAddress = () => {
+    setAddress(null);
+  };
 
   useLayoutEffect(() => {
     if (zipcode && zipcode.length === 5)
@@ -75,6 +80,7 @@ const RegisterContextProvider: FC<{ children: ReactNode }> = (props) => {
           setZipCode,
           district,
           setDistrict,
+          clearAddress,
           ...(address && { address }),
         },
         data,

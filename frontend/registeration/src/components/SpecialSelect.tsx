@@ -7,8 +7,9 @@ import {
   useRadio,
   useRadioGroup,
 } from "@chakra-ui/react";
-import { FC, forwardRef } from "react";
+import { FC, forwardRef, useContext } from "react";
 import { UseFormRegister } from "react-hook-form";
+import { registerDataContext } from "../context/RegisterDataContext";
 import { step } from "../pages/Home/stepsdata";
 
 const RadioCard: FC<RadioProps> = (radio) => {
@@ -40,9 +41,11 @@ const SpecialSelect: FC<{
   register: any;
 }> = forwardRef(
   ({ step: { options, key, isRequired }, radioProps, register }, ref) => {
+    const { data, setData } = useContext(registerDataContext);
     const { getRootProps, getRadioProps } = useRadioGroup({
       name: key,
       ...radioProps,
+      value: data[key],
     });
     const group = getRootProps();
     return (
@@ -52,7 +55,9 @@ const SpecialSelect: FC<{
           {...group}
           ref={ref as any}
           {...register}
-          // onChange={(e) => console.log(e.target.name)}
+          onChange={(e) =>
+            setData((v) => ({ ...v, [key]: (e.target as any).value }))
+          }
         >
           {options?.map((item) => {
             const radio = getRadioProps({ value: item.value });
