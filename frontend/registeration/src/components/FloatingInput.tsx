@@ -6,7 +6,15 @@ import {
   FormErrorMessage,
   InputProps,
 } from "@chakra-ui/react";
-import { FC, forwardRef } from "react";
+import {
+  ChangeEvent,
+  FC,
+  forwardRef,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { registerDataContext } from "../context/RegisterDataContext";
 
 export const sitInput: InputProps = {
   bg: "rgba(255,255,255,0.3)",
@@ -29,9 +37,24 @@ interface FloatingInputProps {
   input?: InputProps;
   isRequired?: boolean;
   isInvalid?: boolean;
+  name?: string;
 }
 
 const FloatingInput: FC<FloatingInputProps> = forwardRef((props, ref) => {
+  // const [text, setText] = useState("");
+  const { data, setData } = useContext(registerDataContext);
+  // console.log(props);
+  const handelChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (props.name && typeof props.name === "string") {
+      setData((v) => ({ ...v, [props.name as string]: e.target.value }));
+    }
+    if ((props as any).onChange) {
+      (props as any).onChange(e);
+    }
+    if (props.input?.onChange) {
+      props.input.onChange(e);
+    }
+  };
   return (
     <FormControl
       variant="floating"
@@ -41,9 +64,11 @@ const FloatingInput: FC<FloatingInputProps> = forwardRef((props, ref) => {
       <Input
         variant={"unstyled"}
         ref={ref as any}
+        {...(props.name && { value: data[props.name] || "" })}
         {...props}
         {...sitInput}
         {...props.input}
+        onChange={handelChange}
         placeholder=" "
       />
       <FormLabel>{props.placeholder}</FormLabel>

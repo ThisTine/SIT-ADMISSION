@@ -78,6 +78,7 @@ const StepComponents: FC<StepComponentsProps> = ({
                           options={step.options}
                           placeholder={step.placeholder}
                           required={step.isRequired}
+                          name={step.key}
                           {...(register(step.key, {
                             required: step.isRequired,
                           }) as any)}

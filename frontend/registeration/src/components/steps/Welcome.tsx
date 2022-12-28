@@ -12,16 +12,20 @@ import React, {
   FC,
   FormEvent,
   SetStateAction,
+  useContext,
   useState,
 } from "react";
 import BlurCard from "../BlurCard";
 import Devider from "../Devider";
 import FloatingInput from "../FloatingInput";
 import { Link as RouterDomLink } from "react-router-dom";
+import { registerDataContext } from "../../context/RegisterDataContext";
 const Welcome: FC<{ setUserEmail: Dispatch<SetStateAction<string>> }> = ({
   setUserEmail,
 }) => {
-  const [email, setEmail] = useState<string>("");
+  const {
+    data: { email },
+  } = useContext(registerDataContext);
   const onSubmit = (e: FormEvent<HTMLDivElement>) => {
     e.preventDefault();
     setUserEmail(email);
@@ -50,8 +54,9 @@ const Welcome: FC<{ setUserEmail: Dispatch<SetStateAction<string>> }> = ({
         <Container maxW={"md"} as="form" onSubmit={onSubmit}>
           <FloatingInput
             placeholder="Email"
+            name="email"
             isRequired
-            input={{ type: "email", onChange: (e) => setEmail(e.target.value) }}
+            input={{ type: "email" }}
           />
           <VStack gap={5} mt={5}>
             <Button px={16} variant={"sit-blue"} size={"lg"} type="submit">

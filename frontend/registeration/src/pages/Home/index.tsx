@@ -7,7 +7,7 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { FC, useContext, useState } from "react";
+import { FC, useContext, useEffect, useState } from "react";
 import BlurCard from "../../components/BlurCard";
 import Devider from "../../components/Devider";
 import FloatingInput from "../../components/FloatingInput";
@@ -28,7 +28,11 @@ import {
 } from "./stepsdata";
 
 const Home = () => {
-  const { addressContext } = useContext(registerDataContext);
+  const {
+    addressContext,
+    data: { email },
+    setData,
+  } = useContext(registerDataContext);
   const so = stepone.map((item) => ({
     ...item,
     components: item.components.map((i) => ({
@@ -70,7 +74,7 @@ const Home = () => {
   const steps = [so, steptwo, stepthree];
 
   const [formIndex, setFormIndex] = useState(0);
-  const [email, setEmail] = useState<string>("");
+  const [cemail, setEmail] = useState<string>("");
   const [data, setdata] = useState<Record<string, string>>({});
   const buttonBuilder = (formInd: number, totalIndex: number) => {
     const back = {
@@ -94,6 +98,7 @@ const Home = () => {
       leftIcon: <></>,
       children: "Clear",
       onClick: () => {
+        setData((v) => ({}));
         setEmail("");
       },
     };
@@ -104,7 +109,7 @@ const Home = () => {
   };
   return (
     <AppLayout>
-      {!email ? (
+      {!cemail ? (
         <Welcome setUserEmail={setEmail} />
       ) : (
         <StepComponents
@@ -118,11 +123,7 @@ const Home = () => {
 };
 
 const HomeWithContext: FC = (props) => {
-  return (
-    <RegisterContextProvider>
-      <Home {...props} />
-    </RegisterContextProvider>
-  );
+  return <Home {...props} />;
 };
 
 export default HomeWithContext;

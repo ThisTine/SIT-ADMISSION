@@ -4,6 +4,7 @@ import {
   FC,
   ReactNode,
   SetStateAction,
+  useEffect,
   useLayoutEffect,
   useState,
 } from "react";
@@ -40,16 +41,22 @@ interface registerDataContext {
     setZipCode?: Dispatch<SetStateAction<string>>;
     setDistrict?: Dispatch<SetStateAction<string>>;
   };
+  data: Record<string, string>;
+  setData: Dispatch<SetStateAction<Record<string, string>>>;
 }
 
 export const registerDataContext = createContext<registerDataContext>({
   addressContext: { zipcode: "", district: "" },
+  data: {},
+  setData: null as any,
 });
 
 const RegisterContextProvider: FC<{ children: ReactNode }> = (props) => {
   const [zipcode, setZipCode] = useState<string>("");
   const [district, setDistrict] = useState<string>("");
   const [address, setAddress] = useState<AddressOptions | null>(null);
+  const [data, setData] = useState<Record<string, string>>({});
+
   useLayoutEffect(() => {
     if (zipcode && zipcode.length === 5)
       axios
@@ -70,6 +77,8 @@ const RegisterContextProvider: FC<{ children: ReactNode }> = (props) => {
           setDistrict,
           ...(address && { address }),
         },
+        data,
+        setData,
       }}
       {...props}
     />

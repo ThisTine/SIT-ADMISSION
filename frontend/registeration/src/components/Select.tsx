@@ -1,9 +1,11 @@
-import { FC, forwardRef, useEffect } from "react";
+import { FC, forwardRef, useContext, useEffect, useLayoutEffect } from "react";
 import { useController } from "react-hook-form";
 import ReactSelect from "react-select";
 import { StateManagerProps } from "react-select/dist/declarations/src/stateManager";
+import { registerDataContext } from "../context/RegisterDataContext";
 
 const Select: FC<StateManagerProps> = forwardRef((props, ref) => {
+  const { data, setData } = useContext(registerDataContext);
   useEffect(() => {
     if (props.options?.length === 1) {
       (props as any).onChange(
@@ -12,11 +14,25 @@ const Select: FC<StateManagerProps> = forwardRef((props, ref) => {
         },
         "" as any
       );
+      if (props.name)
+        setData((v) => ({
+          ...v,
+          [props.name as string]: ((props.options || [])[0] as any).value,
+        }));
     }
   }, [props.options]);
+  useLayoutEffect(() => {
+    if (data[props.name as string]) {
+      (props as any).onChange(
+        {
+          target: { value: data[props.name as string], name: props.name },
+        },
+        "" as any
+      );
+    }
+  }, []);
   return (
     <ReactSelect
-      {...(props.options?.length === 1 && { value: props.options[0] })}
       isDisabled={(props.options?.length || 0) <= 1}
       styles={{
         container: (base) => ({ ...base, zIndex: 3 }),
@@ -54,12 +70,28 @@ const Select: FC<StateManagerProps> = forwardRef((props, ref) => {
         singleValue: (base) => ({ ...base, color: "white" }),
       }}
       {...props}
+      {...(props.name &&
+      data[props.name] &&
+      props.options?.map((item: any) => item.value).includes(data[props.name])
+        ? {
+            value: {
+              value: data[props.name] || "",
+              label: ((props.options?.filter(
+                (item: any) => item.value === (data[props.name as any] || "")
+              )[0] as any) || {})["label"],
+            },
+          }
+        : { value: null })}
+      // {...(props.options?.length === 1 && { value: props.options[0] })}
       ref={ref as any}
       onChange={(newValue: any) => {
         (props as any).onChange(
           { target: { value: newValue.value, name: props.name } },
           "" as any
         );
+        if (props.name) {
+          setData((v) => ({ ...v, [props.name as string]: newValue.value }));
+        }
       }}
     />
   );
