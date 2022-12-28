@@ -27,7 +27,6 @@ const Button: ChakraTheme["components"] = {
         color: "white",
         transition: "0.5s all",
         _hover: {
-          backgroundPosition: "0 100%",
           shadow: "lg",
           transform: "scale(1.01)",
         },

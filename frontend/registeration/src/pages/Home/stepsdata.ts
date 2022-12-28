@@ -11,10 +11,11 @@ export interface step {
   type?: HTMLInputTypeAttribute | "select" | "special-select";
   key: string;
   options?: optionsTypes[];
+  pattern?: RegExp;
 }
 
 interface stepRow {
-  columns?: number;
+  columns?: number | { base?: number; sm?: number; md?: number; lg?: number };
   steps: step[];
 }
 
@@ -79,7 +80,7 @@ const stepone: stepsParent[] = [
         ],
       },
       {
-        columns: 4,
+        columns: { base: 2, lg: 4 },
         steps: [
           {
             key: "postnumber",
@@ -88,9 +89,9 @@ const stepone: stepsParent[] = [
             type: "number",
           },
           {
-            key: "sub-district",
+            key: "province",
             isRequired: true,
-            placeholder: "ตำบล",
+            placeholder: "จังหวัด",
             type: "select",
           },
           {
@@ -100,9 +101,9 @@ const stepone: stepsParent[] = [
             type: "select",
           },
           {
-            key: "province",
+            key: "sub-district",
             isRequired: true,
-            placeholder: "จังหวัด",
+            placeholder: "ตำบล",
             type: "select",
           },
         ],
@@ -154,13 +155,13 @@ const steptwo: stepsParent[] = [
             key: "gpax",
             isRequired: true,
             placeholder: "GPAX รวม",
-            type: "number",
+            type: "text",
           },
           {
             key: "math-gpa",
             isRequired: true,
             placeholder: "GPA กลุ่มสาระคณิตศาสตร์",
-            type: "number",
+            type: "text",
           },
         ],
       },
@@ -171,13 +172,13 @@ const steptwo: stepsParent[] = [
             key: "sic-gpa",
             isRequired: true,
             placeholder: "GPA กลุ่มสาระวิทยาศาสตร์",
-            type: "number",
+            type: "text",
           },
           {
             key: "eng-gpa",
             isRequired: true,
             placeholder: "GPA กลุ่มสาระภาษาต่างประเทศ",
-            type: "number",
+            type: "text",
           },
         ],
       },

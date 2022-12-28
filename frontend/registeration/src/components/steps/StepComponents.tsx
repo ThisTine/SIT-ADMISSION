@@ -8,7 +8,13 @@ import {
   SimpleGrid,
   VStack,
 } from "@chakra-ui/react";
-import React, { Dispatch, FC, SetStateAction } from "react";
+import React, {
+  Dispatch,
+  FC,
+  SetStateAction,
+  useContext,
+  useEffect,
+} from "react";
 import Select from "../Select";
 import { stepone, stepsParent } from "../../pages/Home/stepsdata";
 import BlurCard from "../BlurCard";
@@ -18,6 +24,7 @@ import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 import SpecialSelect from "../SpecialSelect";
 import { useForm } from "react-hook-form";
 import ReactSelect from "react-select";
+import { registerDataContext } from "../../context/RegisterDataContext";
 
 export interface StepComponentsProps {
   next?: ButtonProps;
@@ -31,12 +38,19 @@ const StepComponents: FC<StepComponentsProps> = ({
   stepForm,
   setdata,
 }) => {
-  const { register, handleSubmit, formState } = useForm<any>();
+  const { register, handleSubmit, formState, watch } = useForm<any>();
+  const {
+    addressContext: { setZipCode, setDistrict },
+  } = useContext(registerDataContext);
   const onSubmit = (data: any) => {
-    console.log(data);
     setdata((val) => ({ ...val, ...data }));
     (next as any).onClick();
   };
+  useEffect(() => {
+    if (setDistrict) setDistrict(watch("district"));
+    if (setZipCode && (watch("postnumber") || "").length === 5)
+      setZipCode(watch("postnumber") || "");
+  }, [watch("postnumber"), watch("district")]);
   return (
     <BlurCard>
       <form onSubmit={handleSubmit(onSubmit)}>

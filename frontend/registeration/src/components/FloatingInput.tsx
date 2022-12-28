@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react";
 import { FC, forwardRef } from "react";
 
-const sitInput: InputProps = {
+export const sitInput: InputProps = {
   bg: "rgba(255,255,255,0.3)",
   p: 2,
   py: 3,
