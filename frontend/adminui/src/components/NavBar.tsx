@@ -7,7 +7,7 @@ const NavBar = () => {
     <HStack
       w="100%"
       bg="rgba(255,255,255,0.3)"
-      zIndex={"dropdown"}
+      zIndex={100}
       top={0}
       py={2}
       pos="fixed"

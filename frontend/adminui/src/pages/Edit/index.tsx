@@ -3,15 +3,15 @@ import React from "react";
 import ApplicationForm from "../../components/ApplicationForm";
 import AppLayout from "../../Layout/AppLayout";
 
-const index = () => {
+const Edit = () => {
   return (
     <AppLayout>
       <Box pt={10}>
-        <Heading>Add Application</Heading>
+        <Heading>Edit Application</Heading>
         <ApplicationForm />
       </Box>
     </AppLayout>
   );
 };
 
-export default index;
+export default Edit;

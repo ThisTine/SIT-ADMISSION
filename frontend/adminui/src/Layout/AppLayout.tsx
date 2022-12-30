@@ -9,7 +9,7 @@ const AppLayout: FC<{ children: ReactNode }> = ({ children }) => {
         mt={"70px"}
         maxW="container.xl"
         w="100%"
-        // minH={"calc(100vh - 70px)"}
+        minH={"calc(100vh - 70px)"}
         // display="flex"
         // alignItems={"center"}
         // justifyContent="center"
