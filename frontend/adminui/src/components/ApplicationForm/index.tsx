@@ -17,7 +17,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { DateRangePicker, DateRangePickerValue } from "@mantine/dates";
 import { m } from "framer-motion";
-interface FormState {
+export interface FormState {
   name: string;
   description: string;
   major: string[];

@@ -1,8 +1,10 @@
 import { HStack, Container, Button } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import React from "react";
+import React, { useContext } from "react";
 import logo from "../assets/logo.png";
+import { ActionType, userContext } from "../context/UserContext";
 const NavBar = () => {
+  const { dispatch } = useContext(userContext);
   return (
     <HStack
       w="100%"
@@ -19,7 +21,9 @@ const NavBar = () => {
           <Link to="/">
             <img src={logo} />
           </Link>
-          <Button>Logout</Button>
+          <Button onClick={() => dispatch({ type: ActionType.LOGOUT })}>
+            Logout
+          </Button>
         </HStack>
       </Container>
     </HStack>
