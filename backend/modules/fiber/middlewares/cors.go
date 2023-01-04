@@ -24,4 +24,4 @@ var Cors = func() fiber.Handler {
 	}
 
 	return cors.New(config)
-}()
+}

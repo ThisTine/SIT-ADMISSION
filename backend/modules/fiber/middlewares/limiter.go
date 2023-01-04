@@ -27,4 +27,4 @@ var Limiter = func() fiber.Handler {
 	}
 
 	return limiter.New(config)
-}()
+}

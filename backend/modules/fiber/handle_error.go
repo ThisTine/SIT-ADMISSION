@@ -71,6 +71,7 @@ func ErrorHandler(ctx *fiber.Ctx, err error) error {
 		})
 	}
 
+	// Unknown error
 	return ctx.Status(fiber.StatusInternalServerError).JSON(&response.ErrorResponse{
 		Success: false,
 		Code:    "UNKNOWN_SERVER_SIDE_ERROR",

@@ -7,6 +7,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"gopkg.in/ldap.v2"
 
+	adminFunc "backend/functions/admin"
 	"backend/modules/config"
 	ldapLoader "backend/modules/ldap"
 
@@ -43,7 +44,7 @@ func AdminLoginPutHandler(c *fiber.Ctx) error {
 		config.C.LdapBaseDn,
 		ldap.ScopeWholeSubtree, ldap.NeverDerefAliases, 0, 0, false,
 		fmt.Sprintf("(uid=%s)", *body.Uid),
-		[]string{"dn", "uid", "name"},
+		[]string{"dn", "uid", "cn", "mail"},
 		nil,
 	)
 
@@ -60,10 +61,25 @@ func AdminLoginPutHandler(c *fiber.Ctx) error {
 		return response.Error(false, "LDAP authentication failure", err)
 	}
 
+	// * Construct name from LDAP record
+	name := result.Entries[0].GetAttributeValue("cn")
+	email := result.Entries[0].GetAttributeValue("mail")
+	username := adminFunc.GetUsername(name)
+
+	// * Update admin name if not match
+	if name != value.Val(admin.Name) || email != value.Val(admin.Email) {
+		admin.Name = &name
+		admin.Email = &email
+		if tx := mysql.DB.Model(admin).Updates(admin); tx.Error != nil {
+			return response.Error(false, "Unable to update admin name", tx.Error)
+		}
+	}
+
 	// * Sign JWT
 	claims := &common.AdminClaims{
-		Id:  admin.AdminId,
-		Exp: value.Ptr(time.Now().Add(7 * 24 * time.Hour)),
+		Id:       admin.AdminId,
+		Username: &username,
+		Exp:      value.Ptr(time.Now().Add(7 * 24 * time.Hour)),
 	}
 	token, errr := crypto.SignJwt(claims)
 	if errr != nil {
@@ -71,6 +87,7 @@ func AdminLoginPutHandler(c *fiber.Ctx) error {
 	}
 
 	return c.JSON(response.Info(map[string]any{
-		"token": token,
+		"token":    token,
+		"username": username,
 	}))
 }

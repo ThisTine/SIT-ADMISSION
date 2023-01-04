@@ -30,9 +30,9 @@ func Init() {
 	// Init API endpoints
 	apiGroup := app.Group("api/")
 
-	apiGroup.Use(middlewares.Limiter)
-	apiGroup.Use(middlewares.Cors)
-	apiGroup.Use(middlewares.Recover)
+	apiGroup.Use(middlewares.Limiter())
+	apiGroup.Use(middlewares.Cors())
+	apiGroup.Use(middlewares.Recover())
 
 	endpoints.Init(apiGroup)
 

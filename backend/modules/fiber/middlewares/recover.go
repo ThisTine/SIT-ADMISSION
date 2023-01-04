@@ -15,4 +15,4 @@ var Recover = func() fiber.Handler {
 	}
 
 	return recover.New()
-}()
+}
