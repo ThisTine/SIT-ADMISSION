@@ -10,7 +10,7 @@ import (
 	"backend/utils/text"
 )
 
-func GetProvinceHandler(c *fiber.Ctx) error {
+func ProvinceGetHandler(c *fiber.Ctx) error {
 	// * Parse query
 	query := new(payload.ZipCodeQuery)
 	if err := c.QueryParser(query); err != nil {

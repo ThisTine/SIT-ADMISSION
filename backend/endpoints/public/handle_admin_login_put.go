@@ -20,7 +20,7 @@ import (
 	"backend/utils/value"
 )
 
-func PutAdminLoginHandler(c *fiber.Ctx) error {
+func AdminLoginPutHandler(c *fiber.Ctx) error {
 	// * Parse body
 	body := new(payload.AdminLogin)
 	if err := c.BodyParser(body); err != nil {

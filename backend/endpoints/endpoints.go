@@ -11,12 +11,12 @@ import (
 func Init(router fiber.Router) {
 	// * Public
 	public := router.Group("/public")
-	public.Get("/province", publicEndpoint.GetProvinceHandler)
-	public.Put("/admin/login", publicEndpoint.PutAdminLoginHandler)
+	public.Get("/province", publicEndpoint.ProvinceGetHandler)
+	public.Put("/admin/login", publicEndpoint.AdminLoginPutHandler)
 
 	// * Admin
 	admin := router.Group("/admin", middlewares.AdminJwt())
-	admin.Get("rounds", adminEndpoint.GetRoundsHandler)
+	admin.Get("rounds", adminEndpoint.RoundsGetHandler)
 
 	// * Student
 	student := router.Group("/student")

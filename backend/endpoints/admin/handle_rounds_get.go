@@ -5,13 +5,13 @@ import (
 
 	"backend/modules/mysql"
 	"backend/types/model"
-	extendedModel "backend/types/model_extended"
+	"backend/types/model_extended"
 	"backend/types/payload"
 	"backend/types/response"
 	"backend/utils/text"
 )
 
-func GetRoundsHandler(c *fiber.Ctx) error {
+func RoundsGetHandler(c *fiber.Ctx) error {
 	// * Parse query
 	query := new(payload.AdminRoundQuery)
 	if err := c.QueryParser(query); err != nil {
