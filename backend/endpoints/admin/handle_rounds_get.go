@@ -9,6 +9,7 @@ import (
 	"backend/types/payload"
 	"backend/types/response"
 	"backend/utils/text"
+	"backend/utils/value"
 )
 
 func RoundsGetHandler(c *fiber.Ctx) error {
@@ -29,5 +30,20 @@ func RoundsGetHandler(c *fiber.Ctx) error {
 		return response.Error(false, "Unable to query rounds", err)
 	}
 
-	return c.JSON(response.Info(rounds))
+	// * Map round payload
+	roundsPayload, _ := value.Iterate(rounds, func(round *extendedModel.RoundSubmission) (*payload.RoundInfo, *response.ErrorInstance) {
+		return &payload.RoundInfo{
+			RoundId:           round.RoundId,
+			Name:              round.Name,
+			Year:              round.Year,
+			StartDate:         round.StartDate,
+			SubmissionEndDate: round.SubmissionEndDate,
+			Status:            round.Status,
+			SubmissionCount:   round.SubmissionCount,
+			CreatedAt:         round.CreatedAt,
+			UpdatedAt:         round.UpdatedAt,
+		}, nil
+	})
+
+	return c.JSON(response.Info(roundsPayload))
 }

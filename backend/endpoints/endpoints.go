@@ -16,6 +16,7 @@ func Init(router fiber.Router) {
 
 	// * Admin
 	admin := router.Group("/admin", middlewares.AdminJwt())
+	admin.Post("round", adminEndpoint.RoundPostHandler)
 	admin.Get("rounds", adminEndpoint.RoundsGetHandler)
 
 	// * Student

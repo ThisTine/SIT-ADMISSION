@@ -13,5 +13,7 @@ type RoundInfo struct {
 	StartDate         *time.Time        `json:"start_date"`
 	SubmissionEndDate *time.Time        `json:"submission_end_date"`
 	Status            *enum.RoundStatus `json:"status"`
-	ApplicantCount    *int64            `json:"applicant_count"`
+	SubmissionCount   *int64            `json:"submission_count"`
+	CreatedAt         *time.Time        `json:"created_at"`
+	UpdatedAt         *time.Time        `json:"updated_at"`
 }

@@ -2,17 +2,17 @@ package enum
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 )
 
 type RoundStatus string
 
-const (
-	RoundStatusSubmissionOpening  RoundStatus = "so"
-	RoundStatusSubmissionClosed   RoundStatus = "sc"
-	RoundStatusInterviewAnnounced RoundStatus = "ia"
-	RoundStatusCandidateAnnounced RoundStatus = "ca"
+var (
+	RoundStatusSubmissionDraft    RoundStatus = "draft"
+	RoundStatusSubmissionOpening  RoundStatus = "submission_opening"
+	RoundStatusSubmissionClosed   RoundStatus = "submission_closed"
+	RoundStatusInterviewAnnounced RoundStatus = "interview_announced"
+	RoundStatusFinalistAnnounced  RoundStatus = "finalist_announced"
 )
 
 func (r *RoundStatus) UnmarshalJSON(data []byte) error {
@@ -22,8 +22,12 @@ func (r *RoundStatus) UnmarshalJSON(data []byte) error {
 	}
 
 	val := RoundStatus(*v)
-	if val != RoundStatusSubmissionOpening && val != RoundStatusSubmissionClosed && val != RoundStatusInterviewAnnounced && val != RoundStatusCandidateAnnounced {
-		return errors.New(fmt.Sprintf("%s is not a valid RoundStatus value", val))
+	if val != RoundStatusSubmissionDraft &&
+		val != RoundStatusSubmissionOpening &&
+		val != RoundStatusSubmissionClosed &&
+		val != RoundStatusInterviewAnnounced &&
+		val != RoundStatusFinalistAnnounced {
+		return fmt.Errorf("%s is not a valid RoundStatus value", val)
 	}
 
 	*r = val
