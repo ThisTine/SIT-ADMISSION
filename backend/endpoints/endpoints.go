@@ -21,5 +21,5 @@ func Init(router fiber.Router) {
 
 	// * Student
 	student := router.Group("/student")
-	_ = student
+	student.Put("/create", publicEndpoint.StudentCreatePutHandler)
 }

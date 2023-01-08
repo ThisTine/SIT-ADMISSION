@@ -1,5 +1,6 @@
 package payload
 
 type StudentCreate struct {
-	Email string `json:"email" validate:"email"`
+	Name  *string `json:"name" validate:"required"`
+	Email *string `json:"email" validate:"email"`
 }
