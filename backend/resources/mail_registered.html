@@ -2,9 +2,113 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+<!--    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">-->
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Mail Registered</title>
+
+    <style>
+        * {
+            margin: 0;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Mulish', sans-serif;
+
+            height: 100%;
+
+            background-image: linear-gradient(180deg, rgba(255, 255, 255, 0) 24%, #B6D9F2 100%);
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        header {
+            text-align: center;
+        }
+
+        header h1 {
+            color: #245899;
+            font-weight: 600;
+            font-size: 28px;
+            margin-bottom: 32px;
+        }
+        header img {
+            width: 240px;
+        }
+
+        .card {
+            width: 80%;
+            max-width: 560px;
+            margin: 0 auto;
+        }
+        .card h2 {
+            font-weight: 500;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        .card p {
+            font-size: 15px;
+            line-height: 24px;
+            margin-bottom: 24px;
+        }
+        .card a {
+            display: inline-block;
+            text-decoration: none;
+            border-radius: 8px;
+            padding: 8px 16px;
+
+            font-weight: 500;
+            font-size: 14px;
+            color: #ffffff;
+            background-color: #5397C7;
+        }
+
+        .divider {
+            border: 0.5px solid rgba(0, 0, 0, 0.1);
+            margin: 28px 0;
+        }
+
+        footer {
+            margin-top: 4px;
+            text-align: center;
+        }
+        footer a {
+            display: inline-block;
+            font-size: 12px;
+            color: #245899;;
+        }
+        footer .separator {
+            display: inline-block;
+            font-size: 14px;
+            margin: 0 6px;
+            color: rgba(0, 0, 0, 0.3);
+        }
+    </style>
 </head>
 <body>
-    <p style="background-color: aquamarine">Email: {{.student_email}}</p>
-    <p>Button URL: {{.cta_url}}</p>
+    <header>
+        <img src="https://admission.sit.kmutt.ac.th/asset/images/kmuttsit-segment-longer.png" alt="university logo">
+        <h1>SIT Admission</h1>
+    </header>
+
+    <div class="card">
+        <h2>Email Address Activated</h2>
+        <p>
+            Your email address has been registered for SIT admission of 2022 for Active Recruitment program.
+            Your form will be automatically saved, and you can continue anytime by using a quick link here:
+        </p>
+        <a href="{{.cta_url}}">Continue registration form</a>
+
+        <hr class="divider" />
+    </div>
+
+    <footer>
+        <a href="https://sit.kmutt.ac.th/">School of Information Technology, KMUTT</a>
+        <div class="separator">|</div>
+        <a href="https://admission.sit.kmutt.ac.th/privacy">Privacy Policy</a>
+    </footer>
 </body>
 </html>

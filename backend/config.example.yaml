@@ -7,6 +7,7 @@ cors:
 mysql_dsn: dev1:20221126@tcp(localhost:3306)/dev1?charset=utf8mb4&parseTime=True&loc=Local
 mysql_migrate: true
 smtp_host: smtp.example.com:587
+smtp_mail: noreply@example.com
 smtp_user: noreply@example.com
 smtp_pass: 12345678
 ldap_address: localhost:636

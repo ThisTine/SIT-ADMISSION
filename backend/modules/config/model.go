@@ -12,6 +12,7 @@ type Model struct {
 	MySqlMigrate bool   `yaml:"mysql_migrate"`
 
 	SmtpHost string `yaml:"smtp_host" validate:"required"`
+	SmtpMail string `yaml:"smtp_mail" validate:"required"`
 	SmtpUser string `yaml:"smtp_user" validate:"required"`
 	SmtpPass string `yaml:"smtp_pass" validate:"required"`
 

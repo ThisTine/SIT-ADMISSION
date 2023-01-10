@@ -13,7 +13,7 @@ import (
 func SendEmail(name string, email string, subject string, template *template.Template, data map[string]any) *response.ErrorInstance {
 	var body bytes.Buffer
 	body.Write([]byte("Subject: " + subject +
-		"\nFrom: \"SIT Admission\" <" + config.C.SmtpUser + "@sit.kmutt.ac.th>" +
+		"\nFrom: \"SIT Admission\" <" + config.C.SmtpMail + ">" +
 		"\nTo: \"" + name + "\" <" + email + ">" +
 		"\nMessage-ID: <outbound_admission_" + *text.Random(text.RandomSet.UpperAlphaNum, 26) + "@sit.kmutt.ac.th>" +
 		"\nMIME-Version: 1.0" +
