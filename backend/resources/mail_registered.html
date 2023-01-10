@@ -2,8 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<!--    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">-->
-    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700&display=swap" rel="stylesheet">
     <title>Mail Registered</title>
 
     <style>
@@ -16,7 +14,7 @@
         }
 
         body {
-            font-family: 'Mulish', sans-serif;
+            font-family: sans-serif;
 
             height: 100%;
 
@@ -28,7 +26,6 @@
         header {
             text-align: center;
         }
-
         header h1 {
             color: #245899;
             font-weight: 600;
@@ -66,19 +63,23 @@
             background-color: #5397C7;
         }
 
+        .faded-color {
+            color: #323232;
+        }
+
         .divider {
             border: 0.5px solid rgba(0, 0, 0, 0.1);
             margin: 28px 0;
         }
 
         footer {
-            margin-top: 4px;
+            padding-bottom: 8px;
             text-align: center;
         }
         footer a {
             display: inline-block;
             font-size: 12px;
-            color: #245899;;
+            color: #245899;
         }
         footer .separator {
             display: inline-block;
@@ -96,8 +97,12 @@
 
     <div class="card">
         <h2>Email Address Activated</h2>
+        <p class="faded-color">
+            อีเมลของคุณได้รับการลงทะเบียนสำหรับการรับสมัคร SIT admission ปี {{.round_year}} ในโครงการ {{.round_name}} เรียบร้อยแล้ว
+            แบบฟอร์มของคุณจะถูกบันทึกโดยอัตโนมัติ และคุณสามารถดำเนินการต่อได้ทุกเมื่อโดยคลิกที่ล้ิงก์ด้านล่างนี้
+        </p>
         <p>
-            Your email address has been registered for SIT admission of 2022 for Active Recruitment program.
+            Your email address has been registered for SIT admission of {{.round_year}} for {{.round_name}} program.
             Your form will be automatically saved, and you can continue anytime by using a quick link here:
         </p>
         <a href="{{.cta_url}}">Continue registration form</a>
